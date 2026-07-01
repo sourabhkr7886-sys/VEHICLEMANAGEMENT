@@ -1,0 +1,430 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.page-container {
+  min-height: 100vh;
+  padding: 30px;
+  background: #0f172a;
+  color: #e5e7eb;
+  font-family: "Inter", sans-serif;
+}
+
+
+
+.driver-container {
+  margin-top: 25px;
+
+  background: rgba(20, 28, 40, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border-radius: 20px;
+  padding: 25px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+.table-title {
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+
+.search-container {
+  margin-bottom: 20px;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 450px;
+
+  padding: 14px 18px;
+
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+
+  color: white;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+
+  outline: none;
+  font-size: 15px;
+
+  transition: all 0.3s ease;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.search-input:focus {
+  border-color: #42a5f5;
+  box-shadow: 0 0 15px rgba(66, 165, 245, 0.3);
+}
+
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+
+
+.vehicle-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+
+.vehicle-table thead tr {
+  background: linear-gradient(135deg, #1565c0, #42a5f5);
+}
+
+.vehicle-table th {
+  padding: 12px;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.vehicle-table tbody tr {
+  background: rgba(20, 28, 40, 0.88);
+  transition: all 0.25s ease;
+}
+
+.vehicle-table tbody tr:nth-child(even) {
+  background: rgba(26, 37, 55, 0.88);
+}
+
+.vehicle-table tbody tr:hover {
+  background: rgba(66, 165, 245, 0.15);
+}
+
+
+.vehicle-table td {
+  padding: 10px;
+  text-align: center;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+
+.vehicle-photo {
+  width: 80px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #42a5f5;
+}
+
+
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.edit-btn,
+.assign-btn,
+.delete-btn,
+.save-btn,
+.cancel-btn,
+.activate-btn,
+.deactivate-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+
+.edit-btn {
+  background: #2563eb;
+  color: white;
+}
+.edit-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+.assign-btn {
+  background: #16a34a;
+  color: rgba(255, 255, 255, 0.616);
+}
+.assign-btn:hover {
+  background: #15803d;
+  transform: translateY(-2px);
+}
+
+
+.delete-btn {
+  background: #dc2626;
+  color: white;
+}
+.delete-btn:hover {
+  background: #b91c1c;
+  transform: translateY(-2px);
+}
+
+.save-btn {
+  background: #16a34a;
+  color: white;
+}
+.save-btn:hover {
+  background: #15803d;
+  transform: translateY(-2px);
+}
+
+
+.cancel-btn {
+  background: #6b7280;
+  color: white;
+  margin-left: 10px;
+}
+.cancel-btn:hover {
+  background: #4b5563;
+  transform: translateY(-2px);
+}
+
+
+.activate-btn {
+  background: #16a34a;
+  color: white;
+}
+.activate-btn:hover {
+  background: #15803d;
+  transform: translateY(-2px);
+}
+
+
+.deactivate-btn {
+  background: #f59e0b;
+  color: white;
+}
+.deactivate-btn:hover {
+  background: #d97706;
+  transform: translateY(-2px);
+}
+
+
+.status-badge {
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.status-active {
+  background: rgba(22, 163, 74, 0.2);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.4);
+}
+
+.status-inactive {
+  background: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.button-group {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+/* ==========================
+   TABLE CONTAINER
+========================== */
+
+.table-container {
+  margin-top: 20px;
+  background: rgba(20, 28, 40, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 25px;
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+
+/* ==========================
+   VEHICLE SELECT
+========================== */
+
+.vehicle-input {
+  width: 100%;
+  min-width: 180px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,.08);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 8px;
+  outline: none;
+}
+
+.vehicle-input option{
+  color:#000;
+}
+
+
+/* ==========================
+   STATUS
+========================== */
+
+.active{
+  color:#22c55e;
+  font-weight:600;
+}
+
+.inactive{
+  color:#f59e0b;
+  font-weight:600;
+}
+
+.assigned{
+  color:#22c55e;
+  font-weight:600;
+}
+
+.not-assigned{
+  color:#ef4444;
+  font-weight:600;
+}
+
+.no-data{
+  padding:30px;
+  color:#fff;
+}
+
+
+/* ==========================
+   EDIT POPUP
+========================== */
+
+.driver-overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,.65);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  backdrop-filter:blur(6px);
+}
+
+.driver-modal{
+  width:520px;
+  max-width:90%;
+  background:#162031;
+  border-radius:18px;
+  padding:30px;
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 20px 50px rgba(0,0,0,.45);
+  animation:fadeIn .3s ease;
+}
+
+.driver-modal .table-title{
+  margin-bottom:20px;
+  text-align:center;
+}
+
+.modal-body{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+.modal-body label{
+  color:#fff;
+  font-weight:600;
+  margin-bottom:4px;
+}
+
+.modal-body input{
+  width:100%;
+  padding:12px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;
+  color:#fff;
+  outline:none;
+  transition:.3s;
+}
+
+.modal-body input:focus{
+  border-color:#42a5f5;
+  box-shadow:0 0 12px rgba(66,165,245,.35);
+}
+
+.modal-buttons{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:25px;
+}
+
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:768px){
+
+  .page-container{
+    padding:15px;
+  }
+
+  .table-title{
+    font-size:22px;
+  }
+
+  .action-buttons{
+    flex-direction:column;
+  }
+
+  .vehicle-input{
+    min-width:140px;
+  }
+
+  .driver-modal{
+    width:95%;
+    padding:20px;
+  }
+
+}

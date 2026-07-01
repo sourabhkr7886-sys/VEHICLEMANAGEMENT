@@ -1,0 +1,255 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+.table-container {
+  margin-top: 25px;
+  background: rgba(20, 28, 40, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 25px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+
+
+.table-title {
+  color: white;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+
+
+.search-container {
+  margin-bottom: 20px;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 450px;
+
+  padding: 14px 18px;
+
+  background: rgba(255,255,255,0.08);
+  color: white;
+
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 12px;
+
+  outline: none;
+  font-size: 15px;
+
+  transition: 0.3s;
+}
+
+.search-input::placeholder {
+  color: rgba(255,255,255,0.60);
+}
+
+.search-input:focus {
+  border-color: #42a5f5;
+  box-shadow: 0 0 15px rgba(66,165,245,0.30);
+}
+
+
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+
+
+.vehicle-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+
+
+.vehicle-table thead tr {
+  background: linear-gradient(
+    135deg,
+    #1565c0,
+    #42a5f5
+  );
+}
+
+.vehicle-table th {
+  padding: 12px;
+  color: white;
+  border: 1px solid rgba(255,255,255,0.08);
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+}
+
+
+
+.vehicle-table tbody tr {
+  background: rgba(20, 28, 40, 0.88);
+}
+
+.vehicle-table tbody tr:nth-child(even) {
+  background: rgba(26, 37, 55, 0.88);
+}
+
+
+
+.vehicle-table tbody tr:hover {
+  background: linear-gradient(
+    135deg,
+    #1565c0,
+    #1976d2
+  );
+  transition: all 0.3s ease;
+}
+
+.vehicle-table tbody tr:hover td {
+  color: white;
+  font-weight: 500;
+}
+
+
+
+.vehicle-table td {
+  padding: 10px;
+  text-align: center;
+  color: white;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: transparent;
+}
+
+
+
+.vehicle-photo {
+  width: 80px;
+  height: 50px;
+
+  object-fit: cover;
+
+  border-radius: 8px;
+
+  border: 2px solid #42a5f5;
+}
+
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+
+.edit-btn {
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+
+  background: linear-gradient(
+    135deg,
+    #f59e0b,
+    #d97706
+  );
+
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+
+  transition: 0.3s;
+}
+
+.edit-btn:hover {
+  transform: translateY(-2px);
+}
+
+
+
+.assign-btn {
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+
+  background: linear-gradient(
+    135deg,
+    #2563eb,
+    #1d4ed8
+  );
+
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+
+  transition: 0.3s;
+}
+
+.assign-btn:hover {
+  transform: translateY(-2px);
+}
+
+
+.delete-btn {
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+
+  background: linear-gradient(
+    135deg,
+    #ef4444,
+    #dc2626
+  );
+
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+
+  transition: 0.3s;
+}
+
+.delete-btn:hover {
+  transform: translateY(-2px);
+}
+
+
+
+.no-data {
+  padding: 20px;
+  text-align: center;
+  color: rgba(255,255,255,0.80);
+  font-weight: 600;
+}
+
+
+
+@media (max-width: 768px) {
+
+  .table-container {
+    padding: 15px;
+  }
+
+  .table-title {
+    font-size: 22px;
+  }
+
+  .vehicle-table th,
+  .vehicle-table td {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .vehicle-photo {
+    width: 65px;
+    height: 40px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+}
