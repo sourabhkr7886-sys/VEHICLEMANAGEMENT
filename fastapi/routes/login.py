@@ -3,15 +3,12 @@ from fastapi import (
     Depends,
     HTTPException
 )
-from fastapi.security import OAuth2PasswordRequestForm
+# from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
 from database import get_db
 from models.user import User
-from schemas.user import (
-    ForgotPassword,
-    ResetPassword
-)
+from schemas.user import (UserLogin, ForgotPassword,ResetPassword)
 from jwta.jwt import (
     verify_password,
     create_access_token,
@@ -22,18 +19,18 @@ from jwta.jwt import (
 router = APIRouter()
 
 
-# ==========================================================
+
 # LOGIN
-# ==========================================================
+
 @router.post("/login")
 def login(
-    form_data: OAuth2PasswordRequestForm = Depends(),
+    data: UserLogin,
     db: Session = Depends(get_db)
 ):
 
     db_user = (
         db.query(User)
-        .filter(User.email == form_data.username)
+        .filter(User.email == data.email)
         .first()
     )
 
@@ -49,8 +46,14 @@ def login(
             detail="Your account is deactivated. Contact Admin."
         )
 
+    if db_user.role != data.role:
+        raise HTTPException(
+            status_code=400,
+            detail="Invalid role selected"
+        )
+
     if not verify_password(
-        form_data.password,
+        data.password,
         db_user.password
     ):
         raise HTTPException(
@@ -67,17 +70,15 @@ def login(
     )
 
     return {
-        "access_token": token,
-        "token_type": "bearer",
+        "token": token,
         "message": "Login successful",
         "role": db_user.role,
         "user_id": db_user.id
     }
 
 
-# ==========================================================
 # FORGOT PASSWORD
-# ==========================================================
+
 @router.post("/forgot-password")
 def forgot_password(
     data: ForgotPassword,
@@ -110,9 +111,8 @@ def forgot_password(
     }
 
 
-# ==========================================================
 # RESET PASSWORD
-# ==========================================================
+
 @router.post("/reset-password")
 def reset_password(
     data: ResetPassword,
