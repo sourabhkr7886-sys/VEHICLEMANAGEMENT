@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from jwta.jwt import admin_only, manager_only, driver_only
 from database import get_db
+from jwta.jwt import admin_only, manager_only, driver_only
 from models.user import User
 from models.vehicle import Vehicle
 
@@ -11,6 +11,7 @@ router = APIRouter(
     tags=["Dashboard"]
 )
 
+# ADMIN DASHBOARD
 
 @router.get("/admin")
 def admin_dashboard(
@@ -39,12 +40,16 @@ def admin_dashboard(
     ).count()
 
     unassigned_vehicles = db.query(Vehicle).filter(
-        Vehicle.driver_id == None
+        Vehicle.driver_id.is_(None)
     ).count()
+
+    assigned_driver_ids = db.query(Vehicle.driver_id).filter(
+        Vehicle.driver_id.isnot(None)
+    )
 
     unassigned_drivers = db.query(User).filter(
         User.role == "driver",
-        User.vehicle_assigned == None
+        ~User.id.in_(assigned_driver_ids)
     ).count()
 
     invited_managers = db.query(User).filter(
@@ -62,6 +67,9 @@ def admin_dashboard(
         "unassigned_drivers": unassigned_drivers,
         "invited_managers": invited_managers
     }
+
+
+# MANAGER DASHBOARD
 
 @router.get("/manager")
 def manager_dashboard(
@@ -86,12 +94,16 @@ def manager_dashboard(
     ).count()
 
     unassigned_vehicles = db.query(Vehicle).filter(
-        Vehicle.driver_id == None
+        Vehicle.driver_id.is_(None)
     ).count()
+
+    assigned_driver_ids = db.query(Vehicle.driver_id).filter(
+        Vehicle.driver_id.isnot(None)
+    )
 
     unassigned_drivers = db.query(User).filter(
         User.role == "driver",
-        User.vehicle_assigned == None
+        ~User.id.in_(assigned_driver_ids)
     ).count()
 
     return {
@@ -102,13 +114,17 @@ def manager_dashboard(
         "unassigned_vehicles": unassigned_vehicles,
         "unassigned_drivers": unassigned_drivers
     }
+
+
+# DRIVER DASHBOARD
+
 @router.get("/driver")
 def driver_dashboard(
-    user=Depends(driver_only),
+    current_user=Depends(driver_only),
     db: Session = Depends(get_db)
 ):
     driver = db.query(User).filter(
-        User.email == user.get("email"),
+        User.email == current_user["email"],
         User.role == "driver"
     ).first()
 
@@ -117,17 +133,9 @@ def driver_dashboard(
             "message": "Driver not found"
         }
 
-    vehicle = None
-
-    if hasattr(driver, "vehicle_assigned") and driver.vehicle_assigned:
-        vehicle = db.query(Vehicle).filter(
-            Vehicle.id == driver.vehicle_assigned
-        ).first()
-
-    if not vehicle:
-        vehicle = db.query(Vehicle).filter(
-            Vehicle.driver_id == driver.id
-        ).first()
+    vehicle = db.query(Vehicle).filter(
+        Vehicle.driver_id == driver.id
+    ).first()
 
     return {
         "message": "Welcome Driver",
@@ -150,16 +158,20 @@ def driver_dashboard(
         "driver_address": driver.driver_address,
         "experience_years": driver.experience_years,
 
-        "vehicle_assigned": driver.vehicle_assigned,
-
         "vehicle_name": (
-            vehicle.vehicle_name
-            if vehicle else None
+            vehicle.vehicle_name if vehicle else None
         ),
 
         "registration_number": (
-            vehicle.registration_number
-            if vehicle else None
+            vehicle.registration_number if vehicle else None
+        ),
+
+        "vehicle_model": (
+            vehicle.vehicle_model if vehicle else None
+        ),
+
+        "vehicle_type": (
+            vehicle.vehicle_type if vehicle else None
         ),
 
         "assigned_vehicle_name": (
