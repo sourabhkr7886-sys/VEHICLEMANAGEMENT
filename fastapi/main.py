@@ -29,6 +29,7 @@ app.add_middleware(
         "https://vehiclemanagement-2.onrender.com",
         "https://vehiclemanagement-okah-git-master-sourabhkr7886-sys-projects.vercel.app",
         "https://vehiclemanagement-okah-gt9olcrwr-sourabhkr7886-sys-projects.vercel.app",
+        "https://vehiclemanagement-okah-pearl.vercel.app"
         
     ],
     allow_credentials=True,
