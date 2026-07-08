@@ -27,6 +27,8 @@ app.add_middleware(
         "http://127.0.0.1:8000",
         "http://localhost:3000",
         "https://vehiclemanagement-2.onrender.com",
+        "https://vehiclemanagement-2lac.vercel.app",
+        "https://vehiclemanagement-okah-bg4ruqvo7-sourabhkr7886-sys-projects.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
